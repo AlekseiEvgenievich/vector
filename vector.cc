@@ -4,7 +4,7 @@ class Vector{
 private:
     int* array;
     size_t size;
-    size_t capacity = 4;
+    size_t capacity = 5;
 public:
     Vector(int* array_,size_t size_){
         if (size_ < capacity){
@@ -46,48 +46,22 @@ public:
             array = result;
         }
     }
-    void pop_back(int a){
-        std::cout << "jjjj" << std::endl;
-        if ((size+1) < capacity){
-            std::cout << "jjjj" <<size<< std::endl;
-            int* result = new int[size+1];
-            result[0] = a;
-            for(int i=1;i<=size;++i){
-                result[i] = array[i-1];
-            }
-            size = size + 1;
-            delete [] array;
-            array = result;
-        }
-        else{
-            std::cout << "bbb" <<size<< std::endl;
-            capacity = 2*size;
-            int* result = new int[capacity];
-            result[0] = a;
-            for(int i=1;i<=size;++i){
-                result[i] = array[i-1];
-            }
-            size += 1;
-            delete [] array;
-            array = result;
+    void pop_back(){
+        std::cout << "jjjj" <<size<< std::endl;
+        if (size > 0){
+            size = size - 1;
         }
     }
     void insert(int a,int index){
         std::cout << "jjjj" << std::endl;
         if ((size+1) < capacity){
             std::cout << "jjjj" <<size<< std::endl;
-            int* result = new int[size+1];
-            //result[0] = a;
-            for(int i = 0;i<index;++i){
-                result[i] = array[i];
-            }
-            result[index] = a;
-            for(int i = index+1;i<=size;++i){
-                result[i] = array[i-1];
-            }
+            for(int i = size;i>index;--i){
+                    array[i] = array[i-1];
+                }
+            array[index] = a;
+
             size = size + 1;
-            delete [] array;
-            array = result;
         }
         else{
             std::cout << "bbb" <<size<< std::endl;
@@ -107,16 +81,10 @@ public:
     }
     void remove(int index){
             std::cout << "jjjj" <<size<< std::endl;
-            int* result = new int[size-1];
-            for(int i = 0;i<index;++i){
-                result[i] = array[i];
-            }
-            for(int i = index;i<size;++i){
-                result[i] = array[i+1];
+            for(int i = index;i<size-1;++i){
+                array[i] = array[i+1];
             }
             size = size - 1;
-            delete [] array;
-            array = result;
         
     }
     void Print(){
