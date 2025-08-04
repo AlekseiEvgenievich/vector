@@ -80,12 +80,13 @@ public:
         }
     }
     void remove(int index){
+        if (index>=0){
             std::cout << "jjjj" <<size<< std::endl;
             for(int i = index;i<size-1;++i){
                 array[i] = array[i+1];
             }
             size = size - 1;
-        
+        }
     }
     void Print(){
         for(int i=0;i<size;++i){
