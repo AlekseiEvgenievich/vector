@@ -1,23 +1,24 @@
 #include <stddef.h>
 #include <iostream>
+template <typename T>
 class Vector{
 private:
-    int* array;
+    T* array;
     size_t size;
-    size_t capacity = 5;
+    size_t capacity = 4;
 public:
-    Vector(int* array_,size_t size_){
+    Vector(T* array_,size_t size_){
         if (size_ < capacity){
             size = size_;
-            array = new int[capacity];
+            array = new T[capacity];
             for(int i=0;i<size;++i){
                 array[i] = array_[i];
             }
         }
         else{
             size = size_;
-            capacity = 1.5*size;
-            array = new int[capacity];
+            capacity = 2*size;
+            array = new T[capacity];
             for(int i=0;i<size;++i){
                 array[i] = array_[i];
             }
@@ -26,9 +27,9 @@ public:
     ~Vector(){
         delete [] array;
     }
-    void push_back(int a){
+    void push_back(T a){
         std::cout << "jjjj" << std::endl;
-        if ((size+1) < capacity){
+        if ((size) < capacity){
             std::cout << "jjjj" <<size<< std::endl;
             array[size] = a;
             size = size + 1;
@@ -36,7 +37,7 @@ public:
         else{
             std::cout << "bbb" <<size<< std::endl;
             capacity = 2*size;
-            int* result = new int[capacity];
+            T* result = new T[capacity];
             for(int i=0;i<size;++i){
                 result[i] = array[i];
             }
@@ -52,9 +53,9 @@ public:
             size = size - 1;
         }
     }
-    void insert(int a,int index){
+    void insert(T a,int index){
         std::cout << "jjjj" << std::endl;
-        if ((size+1) < capacity){
+        if ((size) < capacity){
             std::cout << "jjjj" <<size<< std::endl;
             for(int i = size;i>index;--i){
                     array[i] = array[i-1];
@@ -66,7 +67,7 @@ public:
         else{
             std::cout << "bbb" <<size<< std::endl;
             capacity = 2*size;
-            int* result = new int[capacity];
+            T* result = new T[capacity];
             for(int i = 0;i<index;++i){
                 result[i] = array[i];
             }
@@ -90,18 +91,18 @@ public:
     }
     void Print(){
         for(int i=0;i<size;++i){
-            std::cout << array[i];
+            std::cout << array[i] << " ";
         }
     }
 };
 
 int main(){
-    int a[3] = {2,3,5};
+    double a[3] = {2.1,3.1,5.1};
     Vector v(a,3);
   //  v.Print();
-  //  v.pop_back(7);
+    v.push_back(7);
   //  v.Print();
-    v.remove(2);
+ //   v.remove(2);
     v.Print();
     return 1;
 }
