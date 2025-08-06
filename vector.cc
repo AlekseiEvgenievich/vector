@@ -63,7 +63,7 @@ public:
     }
     void insert(T a,int index){
         std::cout << "jjjj" << std::endl;
-        if(index<0){
+        if((index<0)&&(index>size)){
             throw std::out_of_range("Index is out of range");
         }
         if ((size) < capacity){
@@ -102,7 +102,7 @@ public:
         }
     }
     void remove(int index){
-        if (index>=0){
+        if (((index>=0)&&(index<size))){
             std::cout << "jjjj" <<size<< std::endl;
             for(int i = index;i<size-1;++i){
                 array[i] = array[i+1];
@@ -128,7 +128,7 @@ int main(){
   //  v.Print();
     v.push_back(7);
   //  v.Print();
-        v.remove(-2);
+        v.remove(10);
         v.Print();
     }
     catch (std::exception& ex) {
