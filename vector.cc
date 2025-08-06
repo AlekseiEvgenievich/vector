@@ -1,5 +1,10 @@
 #include <stddef.h>
 #include <iostream>
+class my_out_of_range:public std::exception{
+    const char* what() const noexcept override{
+        return "out of range!";
+    }
+};
 template <typename T>
 class Vector{
 private:
@@ -64,7 +69,8 @@ public:
     void insert(T a,int index){
         std::cout << "jjjj" << std::endl;
         if((index<0)&&(index>size)){
-            throw std::out_of_range("Index is out of range");
+            //throw std::out_of_range("Index is out of range");
+            throw my_out_of_range();
         }
         if ((size) < capacity){
             std::cout << "jjjj" <<size<< std::endl;
@@ -110,7 +116,9 @@ public:
             size = size - 1;
         }
         else{
-            throw std::out_of_range("Index is out of range");
+            throw my_out_of_range();
+           // throw std::out_of_range("Index is out of range");
+            
         }
     }
     
