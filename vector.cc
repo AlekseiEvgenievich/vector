@@ -88,7 +88,11 @@ public:
             }
             size = size - 1;
         }
+        else{
+            throw std::out_of_range("Index is out of range");
+        }
     }
+    
     void Print(){
         for(int i=0;i<size;++i){
             std::cout << array[i] << " ";
@@ -102,7 +106,12 @@ int main(){
   //  v.Print();
     v.push_back(7);
   //  v.Print();
- //   v.remove(2);
+    try{
+        v.remove(-2);
+    }
+    catch (const std::out_of_range& e) {
+           std::cerr << "Caught exception: " << e.what() << std::endl;
+       }
     v.Print();
     return 1;
 }
