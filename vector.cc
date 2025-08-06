@@ -35,9 +35,14 @@ public:
             size = size + 1;
         }
         else{
-            std::cout << "bbb" <<size<< std::endl;
-            capacity = 2*size;
-            T* result = new T[capacity];
+            T * result = nullptr;
+            try {
+                result = new T[capacity];
+            }
+            catch (const std::bad_alloc& e) {
+                std::cerr << "Failed to allocate memory in constructor: " << e.what() << std::endl;
+                throw e;
+            }
             for(int i=0;i<size;++i){
                 result[i] = array[i];
             }
@@ -52,9 +57,15 @@ public:
         if (size > 0){
             size = size - 1;
         }
+        else{
+             throw std::underflow_error("Vector is empty");
+        }
     }
     void insert(T a,int index){
         std::cout << "jjjj" << std::endl;
+        if(index<0){
+            throw std::out_of_range("Index is out of range");
+        }
         if ((size) < capacity){
             std::cout << "jjjj" <<size<< std::endl;
             for(int i = size;i>index;--i){
@@ -63,11 +74,21 @@ public:
             array[index] = a;
 
             size = size + 1;
+            std::cout << "bbb" <<size<< std::endl;
+            capacity = 2*size;
+          
         }
         else{
             std::cout << "bbb" <<size<< std::endl;
             capacity = 2*size;
-            T* result = new T[capacity];
+            T* result = nullptr;
+            try {
+                result = new T[capacity];
+            }
+            catch (const std::bad_alloc& e) {
+                std::cerr << "Failed to allocate memory in constructor: " << e.what() << std::endl;
+                throw e;
+            }
             for(int i = 0;i<index;++i){
                 result[i] = array[i];
             }
@@ -101,17 +122,17 @@ public:
 };
 
 int main(){
+    try{
     double a[3] = {2.1,3.1,5.1};
     Vector v(a,3);
   //  v.Print();
     v.push_back(7);
   //  v.Print();
-    try{
         v.remove(-2);
+        v.Print();
     }
-    catch (const std::out_of_range& e) {
-           std::cerr << "Caught exception: " << e.what() << std::endl;
+    catch (std::exception& ex) {
+           std::cerr << "Caught exception: " << ex.what() << std::endl;
        }
-    v.Print();
-    return 1;
+    return 0;
 }
